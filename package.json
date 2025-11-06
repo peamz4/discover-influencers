@@ -1,0 +1,34 @@
+{
+  "name": "discover-influencers",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Prime Influencer Discovery Platform - Monorepo",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:api": "pnpm --filter api dev",
+    "build": "pnpm run --recursive build",
+    "build:web": "pnpm --filter web build",
+    "build:api": "pnpm --filter api build",
+    "start:web": "pnpm --filter web start",
+    "start:api": "pnpm --filter api start",
+    "clean": "pnpm --recursive exec rm -rf node_modules dist .next",
+    "lint": "pnpm --recursive lint"
+  },
+  "keywords": [
+    "influencer",
+    "discovery",
+    "platform",
+    "nextjs",
+    "express",
+    "monorepo",
+    "pnpm"
+  ],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
