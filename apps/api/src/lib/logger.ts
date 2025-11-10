@@ -1,6 +1,8 @@
 import winston from 'winston';
 
-const logToFiles = (process.env.LOG_TO_FILES || 'true').toLowerCase() === 'true';
+const logToFiles = (process.env.LOG_TO_FILES || 'false').toLowerCase() === 'true';
+const isProduction = process.env.NODE_ENV === 'production';
+const isVercel = process.env.VERCEL === '1';
 
 const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
@@ -12,16 +14,7 @@ const logger = winston.createLogger({
   ),
   defaultMeta: { service: 'prime-influencer-api' },
   transports: [
-    ...(logToFiles ? [
-      new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
-      new winston.transports.File({ filename: 'logs/combined.log' }),
-    ] : []),
-  ],
-});
-
-// If not in production, log to console
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(
+    // Always add console transport for Vercel/serverless
     new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize(),
@@ -29,8 +22,13 @@ if (process.env.NODE_ENV !== 'production') {
           (info) => `${info.timestamp} ${info.level}: ${info.message}`
         )
       ),
-    })
-  );
-}
+    }),
+    // Only add file transports if explicitly enabled and not on Vercel
+    ...(logToFiles && !isVercel ? [
+      new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+      new winston.transports.File({ filename: 'logs/combined.log' }),
+    ] : []),
+  ],
+});
 
 export default logger;
