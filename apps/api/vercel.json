@@ -1,4 +1,10 @@
 {
   "version": 2,
-  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && pnpm --filter api vercel-build"
+  "regions": ["sin1"],
+  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && pnpm --filter api vercel-build",
+  "functions": {
+    "api/**": {
+      "runtime": "nodejs20.x"
+    }
+  }
 }
