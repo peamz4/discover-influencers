@@ -1,5 +1,4 @@
 import express, { Express, Request, Response } from 'express';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import logger from './lib/logger';
@@ -23,8 +22,7 @@ const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
 app.use(helmetConfig);
 app.use(generalLimiter);
 
-// CORS and parsing middleware
-app.use(cors({ origin: corsOrigin, credentials: true }));
+// Parsing middleware (CORS handled in serverless function wrapper)
 app.use(cookieParser());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
