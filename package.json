@@ -13,7 +13,8 @@
     "start:web": "pnpm --filter web start",
     "start:api": "pnpm --filter api start",
     "clean": "pnpm --recursive exec rm -rf node_modules dist .next",
-    "lint": "pnpm --recursive lint"
+    "lint": "pnpm --recursive lint",
+    "check-deployment": "node check-deployment.js"
   },
   "keywords": [
     "influencer",
