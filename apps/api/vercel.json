@@ -1,16 +1,4 @@
 {
   "version": 2,
-  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && pnpm --filter api vercel-build",
-  "installCommand": "echo 'Skipping install, handled in buildCommand'",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api"
-    }
-  ],
-  "functions": {
-    "dist/api.js": {
-      "runtime": "nodejs20.x"
-    }
-  }
+  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && pnpm --filter api vercel-build"
 }
