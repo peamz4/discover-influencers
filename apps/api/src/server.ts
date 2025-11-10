@@ -1,4 +1,5 @@
 import express, { Express, Request, Response } from 'express';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import logger from './lib/logger';
@@ -22,7 +23,18 @@ const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
 app.use(helmetConfig);
 app.use(generalLimiter);
 
-// Parsing middleware (CORS handled in serverless function wrapper)
+// CORS middleware (for Render/traditional deployments)
+// For Vercel serverless, CORS is handled in api/index.js
+if (process.env.VERCEL !== '1') {
+  app.use(cors({ 
+    origin: corsOrigin, 
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie']
+  }));
+}
+
+// Parsing middleware
 app.use(cookieParser());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
