@@ -15,6 +15,7 @@ module.exports = async (req, res) => {
     return;
   }
   
-  // Pass to Express app
+  // Vercel routes /api/xxx to this function, but Express expects /api/xxx
+  // So we DON'T need to modify the path - just pass it through
   return app(req, res);
 };
