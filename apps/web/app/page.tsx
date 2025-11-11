@@ -50,42 +50,42 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-linear-to-r from-[#0a0a1f] via-[#1a1a3e] to-[#2d1b4e]">
       {/* Navigation */}
-      <nav className={`sticky top-0 z-50 flex items-center justify-between px-6 py-3 backdrop-blur-xl border-b border-gray-800/50 transition-all duration-300 ${
+      <nav className={`sticky top-0 z-50 flex items-center justify-between px-8 py-4 backdrop-blur-xl border-b border-gray-800/50 transition-all duration-300 ${
         isScrolled ? 'bg-[#0a0a1f]/30' : 'bg-[#0a0a1f]/95'
       }`}>
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-linear-to-r from-[#00d9ff] to-[#4169e1] rounded-lg flex items-center justify-center">
-            <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-linear-to-r from-[#00d9ff] to-[#4169e1] rounded-lg flex items-center justify-center">
+            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
-          <span className="text-lg font-bold bg-linear-to-r from-[#00d9ff] to-[#4169e1] bg-clip-text text-transparent">
+          <span className="text-xl font-bold bg-linear-to-r from-[#00d9ff] to-[#4169e1] bg-clip-text text-transparent">
             PRIME
           </span>
-          <span className="text-base font-light text-gray-300">INFLUENCER</span>
+          <span className="text-lg font-light text-gray-300">INFLUENCER</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           {isAuthenticated && user ? (
             <>
               {user.role === 'ADMIN' && (
                 <button
                   onClick={handleDashboardClick}
-                  className="text-sm text-gray-300 hover:text-[#00d9ff] transition-colors"
+                  className="text-base text-gray-300 hover:text-[#00d9ff] transition-colors"
                 >
                   Dashboard
                 </button>
               )}
-              <Link href="/discover" className="text-sm text-gray-300 hover:text-[#00d9ff] transition-colors">
+              <Link href="/discover" className="text-base text-gray-300 hover:text-[#00d9ff] transition-colors">
                 Discover
               </Link>
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-[#1a1a3e]/60 border border-[#00d9ff]/30 rounded-full">
+              <div className="flex items-center gap-3 px-4 py-2 bg-[#1a1a3e]/60 border border-[#00d9ff]/30 rounded-full">
                 <div className="flex items-center gap-2">
-                  <div className="h-6 w-6 rounded-full bg-linear-to-br from-[#00d9ff] to-[#4169e1] flex items-center justify-center">
-                    <UserCircle className="h-4 w-4 text-white" />
+                  <div className="h-8 w-8 rounded-full bg-linear-to-br from-[#00d9ff] to-[#4169e1] flex items-center justify-center">
+                    <UserCircle className="h-5 w-5 text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-xs font-medium text-white">{user.name}</span>
-                    <span className="text-[10px] text-[#00d9ff]">{user.role}</span>
+                    <span className="text-sm font-medium text-white">{user.name}</span>
+                    <span className="text-xs text-[#00d9ff]">{user.role}</span>
                   </div>
                 </div>
                 <button
@@ -93,18 +93,18 @@ export default function Home() {
                   className="text-gray-400 hover:text-[#ff00ff] transition-colors"
                   title="Logout"
                 >
-                  <LogOut className="h-3.5 w-3.5" />
+                  <LogOut className="h-4 w-4" />
                 </button>
               </div>
             </>
           ) : (
             <>
-              <Link href="/login" className="text-sm text-gray-300 hover:text-[#00d9ff] transition-colors">
+              <Link href="/login" className="text-base text-gray-300 hover:text-[#00d9ff] transition-colors">
                 Sign In
               </Link>
               <Link
                 href="/register"
-                className="px-4 py-1.5 text-sm bg-linear-to-r from-[#00d9ff] to-[#4169e1] text-white rounded-full hover:shadow-lg hover:shadow-cyan-500/50 transition-all"
+                className="px-6 py-2.5 text-base bg-linear-to-r from-[#00d9ff] to-[#4169e1] text-white rounded-full hover:shadow-lg hover:shadow-cyan-500/50 transition-all"
               >
                 Get Started
               </Link>
@@ -136,18 +136,18 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <main className="relative z-10 max-w-7xl mx-auto px-6 pt-12 pb-12">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <main className="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-24 min-h-[calc(100vh-200px)]">
+        <div className="grid lg:grid-cols-2 gap-16 items-center h-full">
           {/* Left Content */}
-          <div className="space-y-5">
-            <div className="inline-block px-3 py-1.5 bg-linear-to-r from-[#ff00ff]/20 to-[#00d9ff]/20 border border-[#00d9ff]/30 rounded-full">
-              <span className="text-xs font-medium text-[#00d9ff] flex items-center gap-2">
-                <Sparkles className="w-3 h-3" />
+          <div className="space-y-8">
+            <div className="inline-block px-4 py-2 bg-linear-to-r from-[#ff00ff]/20 to-[#00d9ff]/20 border border-[#00d9ff]/30 rounded-full">
+              <span className="text-sm font-medium text-[#00d9ff] flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
                 Discover Top Influencers in Thailand
               </span>
             </div>
 
-            <h1 className="text-3xl lg:text-4xl font-bold leading-tight">
+            <h1 className="text-4xl lg:text-6xl xl:text-7xl font-bold leading-tight">
               <span className="bg-linear-to-r from-white via-[#00d9ff] to-[#4169e1] bg-clip-text text-transparent">
                 Connect with
               </span>
@@ -155,15 +155,15 @@ export default function Home() {
               <span className="text-white">Influential Voices</span>
             </h1>
 
-            <p className="text-base lg:text-lg text-gray-400 leading-relaxed">
+            <p className="text-lg lg:text-xl text-gray-400 leading-relaxed max-w-xl">
               Your premier platform for discovering and collaborating with Thailand&apos;s most engaging content creators across all social media platforms.
             </p>
 
-            <div className="flex flex-wrap gap-3 pt-2">
+            <div className="flex flex-wrap gap-4 pt-4">
               {isAuthenticated ? (
                 <Link
                   href="/discover"
-                  className="px-6 py-2.5 text-sm bg-linear-to-r from-[#00d9ff] to-[#4169e1] text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition-all transform hover:scale-105"
+                  className="px-8 py-4 text-base bg-linear-to-r from-[#00d9ff] to-[#4169e1] text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition-all transform hover:scale-105"
                 >
                   Explore Influencers
                 </Link>
@@ -171,13 +171,13 @@ export default function Home() {
                 <>
                   <Link
                     href="/register"
-                    className="px-6 py-2.5 text-sm bg-linear-to-r from-[#00d9ff] to-[#4169e1] text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition-all transform hover:scale-105"
+                    className="px-8 py-4 text-base bg-linear-to-r from-[#00d9ff] to-[#4169e1] text-white font-semibold rounded-full hover:shadow-2xl hover:shadow-cyan-500/50 transition-all transform hover:scale-105"
                   >
                     Get Started
                   </Link>
                   <Link
                     href="/login"
-                    className="px-6 py-2.5 text-sm border-2 border-[#00d9ff]/50 text-[#00d9ff] font-semibold rounded-full hover:bg-[#00d9ff]/10 transition-all"
+                    className="px-8 py-4 text-base border-2 border-[#00d9ff]/50 text-[#00d9ff] font-semibold rounded-full hover:bg-[#00d9ff]/10 transition-all"
                   >
                     Sign In
                   </Link>
@@ -186,7 +186,7 @@ export default function Home() {
             </div>
 
             {/* Animated Connection Visualization */}
-            <div className="relative pt-4">
+            <div className="relative pt-8">
               <div className="flex items-center justify-start gap-2 flex-wrap">
                 {/* Pulse Animation for Influencer Hub */}
                 <div className="relative group">
@@ -235,8 +235,8 @@ export default function Home() {
               </div>
 
               {/* Animated Stats Ticker */}
-              <div className="mt-4">
-                <p className="text-sm text-gray-400 animate-pulse">
+              <div className="mt-6">
+                <p className="text-base text-gray-400 animate-pulse">
                   Connecting creators with opportunities in real-time
                 </p>
               </div>
@@ -244,7 +244,7 @@ export default function Home() {
           </div>
 
           {/* Right Content - Influencer Network Illustration */}
-          <div className="relative lg:h-[600px] flex items-center justify-center">
+          <div className="relative h-[500px] lg:h-[700px] xl:h-[800px] flex items-center justify-center">
             {/* Floating Badge */}
             <div className="absolute top-0 right-0 px-6 py-3 bg-linear-to-r from-[#ff00ff] to-[#00d9ff] rounded-full shadow-2xl shadow-pink-500/50 animate-bounce z-20">
               <span className="text-white font-bold">NEW</span>
