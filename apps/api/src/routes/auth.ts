@@ -17,14 +17,14 @@ const router = Router();
 const accessTokenCookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production', // HTTPS only in production
-  sameSite: 'lax' as const,
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' as const : 'lax' as const, // 'none' for cross-site in production
   maxAge: 15 * 60 * 1000, // 15 minutes
 };
 
 const refreshTokenCookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
-  sameSite: 'lax' as const,
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' as const : 'lax' as const, // 'none' for cross-site in production
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   path: '/api/auth', // Only send on auth routes
 };
