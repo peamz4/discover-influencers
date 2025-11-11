@@ -19,6 +19,10 @@ const app: Express = express();
 const port = process.env.PORT || 5000;
 const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:3000';
 
+// Trust proxy - required for Render/Railway/etc (behind reverse proxy)
+// This allows express-rate-limit to correctly identify users via X-Forwarded-For
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmetConfig);
 app.use(generalLimiter);
