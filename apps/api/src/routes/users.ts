@@ -51,7 +51,7 @@ router.get('/', authenticate, authorize('ADMIN'), async (req: Request, res: Resp
     ]);
 
     res.json({
-      data: users,
+      users: users,
       pagination: {
         page,
         limit,
