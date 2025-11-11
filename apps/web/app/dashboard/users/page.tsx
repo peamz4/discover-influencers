@@ -14,6 +14,7 @@ export default function UsersPage() {
   const router = useRouter()
   const [users, setUsers] = React.useState<User[]>([])
   const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState<string | null>(null)
   const [search, setSearch] = React.useState('')
   const [roleFilter, setRoleFilter] = React.useState('')
   const [currentPage, setCurrentPage] = React.useState(1)
@@ -24,6 +25,7 @@ export default function UsersPage() {
   const fetchUsers = React.useCallback(async () => {
     try {
       setLoading(true)
+      setError(null)
       const data = await userService.getUsers({
         page: currentPage,
         limit: pageSize,
@@ -31,11 +33,25 @@ export default function UsersPage() {
         role: roleFilter || undefined,
       })
 
-      setUsers(data.users)
-      setTotalPages(data.pagination.totalPages)
-      setTotalUsers(data.pagination.total)
-    } catch (error) {
+      // Ensure data structure is valid
+      if (data && data.users && Array.isArray(data.users)) {
+        setUsers(data.users)
+        setTotalPages(data.pagination?.totalPages || 1)
+        setTotalUsers(data.pagination?.total || 0)
+      } else {
+        console.error('Invalid data structure:', data)
+        setUsers([])
+        setTotalPages(1)
+        setTotalUsers(0)
+        setError('Received invalid data from server')
+      }
+    } catch (error: unknown) {
       console.error('Failed to fetch users:', error)
+      setUsers([])
+      setTotalPages(1)
+      setTotalUsers(0)
+      const errorMessage = error instanceof Error ? error.message : 'Failed to load users. Please try again.'
+      setError(errorMessage)
     } finally {
       setLoading(false)
     }
@@ -137,6 +153,20 @@ export default function UsersPage() {
               </div>
             </CardContent>
           </Card>
+
+          {/* Error State */}
+          {error && (
+            <Card className="glass border-red-500/30 bg-red-500/10">
+              <CardContent className="pt-6">
+                <div className="flex items-center gap-3 text-red-400">
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>{error}</span>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Results Count */}
           <div className="flex items-center justify-between text-sm text-gray-400">
