@@ -54,7 +54,7 @@ Free tier spins down after 15 minutes of inactivity. First request after spin-do
    - **Branch:** `main`
    - **Root Directory:** `apps/api`
    - **Environment:** `Node`
-   - **Build Command:** `npm install && npx prisma generate && npm run build`
+   - **Build Command:** `npm install && npx prisma generate --schema=./prisma/schema.prisma && npm run build`
    - **Start Command:** `npm run start`
    - **Plan:** **FREE**
 
@@ -229,8 +229,11 @@ Render automatically pings your service. If it fails 3 times, you get an email.
 ## 🐛 Troubleshooting
 
 ### Build Fails
-**Error:** `Cannot find module 'prisma'`
-**Fix:** Ensure build command is: `npm install && npx prisma generate && npm run build`
+**Error:** `Cannot find module 'prisma'` or `Could not find Prisma schema`
+**Fix:** Ensure build command is: `npm install && npx prisma generate --schema=./prisma/schema.prisma && npm run build`
+
+**Error:** `Parameter 'x' implicitly has an 'any' type`
+**Fix:** This has been fixed in the latest code. Pull latest changes from main branch.
 
 ### Database Connection Fails
 **Error:** `Can't reach database server`

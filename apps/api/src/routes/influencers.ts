@@ -81,7 +81,7 @@ router.get('/', authenticate, async (req: Request, res: Response) => {
     ]);
 
     // Transform database fields to match frontend expectations
-    const transformedInfluencers = influencers.map(inf => ({
+    const transformedInfluencers = influencers.map((inf: any) => ({
       id: inf.id,
       name: inf.fullName,
       email: inf.email,
@@ -559,14 +559,14 @@ router.get('/analytics/stats', authenticate, async (req: Request, res: Response)
     ]);
 
     // Calculate total followers
-    const totalFollowers = influencers.reduce((sum, inf) => {
+    const totalFollowers = influencers.reduce((sum: number, inf: any) => {
       return sum + (inf.followersCount || inf.totalFollowersCount || 0);
     }, 0);
 
     // Calculate average engagement rate (returned as percentage with one decimal)
-    const ratesWithValue = influencers.filter(inf => inf.engagementRate != null);
+    const ratesWithValue = influencers.filter((inf: any) => inf.engagementRate != null);
     const avgEngagementRatePct = ratesWithValue.length > 0
-      ? (ratesWithValue.reduce((sum, inf) => sum + (inf.engagementRate || 0), 0) / ratesWithValue.length) * 100
+      ? (ratesWithValue.reduce((sum: number, inf: any) => sum + (inf.engagementRate || 0), 0) / ratesWithValue.length) * 100
       : 0;
 
     res.json({
@@ -575,9 +575,9 @@ router.get('/analytics/stats', authenticate, async (req: Request, res: Response)
       totalFollowers,
       // one decimal place percentage (e.g., 5.4 for 5.4%)
       avgEngagementRate: Math.round(avgEngagementRatePct * 10) / 10,
-      byCategory: categoryCounts.map(c => ({ category: c.influencerCategory || 'Uncategorized', count: c._count._all })),
-      byTier: tierCounts.map(t => ({ engagementRateTier: t.engagementRateTier || 'UNSPECIFIED', count: t._count._all })),
-      byStatus: statusCounts.map(s => ({ status: s.status, count: s._count._all })),
+      byCategory: categoryCounts.map((c: any) => ({ category: c.influencerCategory || 'Uncategorized', count: c._count._all })),
+      byTier: tierCounts.map((t: any) => ({ engagementRateTier: t.engagementRateTier || 'UNSPECIFIED', count: t._count._all })),
+      byStatus: statusCounts.map((s: any) => ({ status: s.status, count: s._count._all })),
     });
   } catch (error) {
     logger.error('Get stats error:', error);
