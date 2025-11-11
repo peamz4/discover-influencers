@@ -75,7 +75,7 @@ DATABASE_URL=postgresql://discover_influencers_user:xxxxx@dpg-xxxxx/discover_inf
 
 # JWT Secrets (use strong random strings)
 JWT_ACCESS_SECRET=your-super-secret-access-key-change-this-in-production-min-32-chars
-JWT_REFRESH_SECRET=your-super-secret-refresh-key-change-this-in-production-min-32-chars
+**JWT_REFRESH_SECRET**=your-super-secret-refresh-key-change-this-in-production-min-32-chars
 
 # CORS (your frontend URL - will update after deploying frontend)
 CORS_ORIGIN=http://localhost:3000
@@ -108,9 +108,9 @@ Run this twice to get two different secrets.
 
 ---
 
-### Step 6: Run Database Migrations (1 minute)
+### Step 6: Run Database Migrations (2 options)
 
-After deployment succeeds:
+**Option A: From Render Shell (Requires Paid Plan)**
 
 1. In your Render Web Service dashboard, click **"Shell"** tab
 2. Run:
@@ -122,6 +122,31 @@ After deployment succeeds:
    ```bash
    npx prisma db seed
    ```
+
+**Option B: From Your Local Machine (FREE - Recommended)**
+
+1. Get your External Database URL from Render:
+   - Go to Render Dashboard → `discover-influencers-db`
+   - Scroll to **"Connections"** section
+   - Copy the **"External Database URL"**
+   - Example: `postgresql://user:password@dpg-xxxxx-a.oregon-postgres.render.com/discover_influencers`
+
+2. Run migrations locally:
+   ```bash
+   # In your project directory (apps/api)
+   cd apps/api
+   
+   # Set the database URL temporarily
+   $env:DATABASE_URL="postgresql://your-external-database-url-here"
+   
+   # Run migrations
+   npx prisma migrate deploy
+   
+   # (Optional) Seed data
+   npx prisma db seed
+   ```
+
+3. Done! Your production database is now migrated.
 
 ---
 
